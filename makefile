@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+         #
+#    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 11:17:27 by luimarti          #+#    #+#              #
-#    Updated: 2026/01/18 15:43:22 by luimarti         ###   ########.fr        #
+#    Updated: 2026/01/18 16:09:16 by lucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 MANDATORY_SRC = main.c \
 				parsing.c \
 				box_of_tools.c \
-				initialization.c
+				init_of_structs.c
 				
 OBJ_DIR = o_files
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(MANDATORY_SRC:.c=.o))
