@@ -20,7 +20,7 @@ MANDATORY_SRC = main.c \
 				box_of_tools.c \
 				init_of_structs.c \
 				philo_routine.c \
-				timing.c
+				timing_and_death_monitor.c
 				
 OBJ_DIR = o_files
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(MANDATORY_SRC:.c=.o))

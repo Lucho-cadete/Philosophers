@@ -12,30 +12,31 @@
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data  data;
-    t_philo *philos;
-    int     i;
-    if (!parse_args(argc, argv, &data))
-        return (1);
-    philos = malloc (sizeof(t_philo) * data.num_philo);
-    if (!philos)
-        return (1);
-    if (!init_philos(&data, philos))
-        return (1);
-    data.start_time = get_time_ms();
-    i = 0;
-    while (i < data.num_philo)
-    {
-        pthread_create (&philos[i].thread, NULL, philo_routine, &philos[i]);
-        i++;
-    }
-    i = 0;
-    while (i < data.num_philo)
-    {
-        pthread_join (philos[i].thread, NULL);
-        i++;
-    }
-    return (0);
+	t_data		data;
+	t_philo		*philos;
+	int			i;
+	pthread_t	monitor;
+
+	i = -1;
+	if (!parse_args(argc, argv, &data))
+		return (1);
+	if (!init_data(&data))
+		return (1);
+	philos = malloc (sizeof(t_philo) * data.num_philo);
+	if (!philos)
+		return (1);
+	data.start_time = get_time_ms();
+	if (!init_philos(&data, philos))
+		return (1);
+	data.philos = philos;
+	pthread_create(&monitor, NULL, monitor_death, &data);
+	while (++i < data.num_philo)
+		pthread_create(&philos[i].thread, NULL, preparing_routine, &philos[i]);
+	i = -1;
+	while (++i < data.num_philo)
+		pthread_join(philos[i].thread, NULL);
+	pthread_join(monitor, NULL);
+	return (0);
 }
