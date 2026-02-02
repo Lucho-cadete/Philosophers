@@ -21,6 +21,7 @@ int	init_data(t_data *data)
 	if (!data->forks)
 		return (0);
 	data->someone_died = 0;
+	data->finished_all_meals = 0;
 	while (i < data->num_philo)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
@@ -44,7 +45,7 @@ int	init_philos(t_data *data, t_philo *philos)
 	i = 0;
 	while (i < data->num_philo)
 	{
-		philos[i].id = i;
+		philos[i].id = i + 1;
 		philos[i].left_fork = &data->forks[i];
 		philos[i].right_fork = &data->forks[(i + 1) % data->num_philo];
 		philos[i].data = data;

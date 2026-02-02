@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 16:02:06 by lucho             #+#    #+#             */
-/*   Updated: 2026/01/30 21:22:30 by lucho            ###   ########.fr       */
+/*   Updated: 2026/02/02 00:07:26 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	philo_routine(t_philo *philo)
 	if (philo->data->someone_died)
 	{
 		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
 	print_action(philo, "is eating");
@@ -86,7 +86,10 @@ void	*preparing_routine(void *arg)
 	philo = (t_philo *) arg;
 	counter = 0;
 	if (philo->data->num_philo == 1)
+	{
 		routine_for_one(philo);
+		return (NULL);
+	}
 	while ((counter < philo->data->must_eat_times
 			|| philo->data->must_eat_times == -1)
 		&& !philo->data->someone_died)
@@ -95,7 +98,7 @@ void	*preparing_routine(void *arg)
 		counter++;
 	}
 	if (counter == philo->data->must_eat_times
-		|| philo->data->must_eat_times != -1)
+		&& philo->data->must_eat_times != -1)
 	{
 		pthread_mutex_lock(&philo->data->finished_mutex);
 		philo->data->finished_all_meals++;

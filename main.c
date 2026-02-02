@@ -22,8 +22,6 @@ int	main(int argc, char **argv)
 	i = -1;
 	if (!parse_args(argc, argv, &data))
 		return (1);
-	if (!init_data(&data))
-		return (1);
 	philos = malloc (sizeof(t_philo) * data.num_philo);
 	if (!philos)
 		return (1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timing.c                                           :+:      :+:    :+:   */
+/*   timing_and_death_monitor.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 21:16:30 by lucho             #+#    #+#             */
-/*   Updated: 2026/01/30 21:20:07 by lucho            ###   ########.fr       */
+/*   Updated: 2026/02/02 00:07:16 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*monitor_death(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&data->finished_mutex);
-		if (data->finished_all_meals == data->must_eat_times)
+		if (data->finished_all_meals == data->num_philo)
 		{
 			pthread_mutex_unlock(&data->finished_mutex);
 			return (NULL);
