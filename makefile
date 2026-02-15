@@ -6,7 +6,7 @@
 #    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 11:17:27 by luimarti          #+#    #+#              #
-#    Updated: 2026/01/30 21:23:33 by lucho            ###   ########.fr        #
+#    Updated: 2026/02/15 16:44:40 by lucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MANDATORY_SRC = main.c \
 				box_of_tools.c \
 				init_of_structs.c \
 				philo_routine.c \
-				timing_and_death_monitor.c
+				timing_and_death_monitor.c \
+				general_cleaning.c
 				
 OBJ_DIR = o_files
 MANDATORY_OBJ = $(addprefix $(OBJ_DIR)/, $(MANDATORY_SRC:.c=.o))

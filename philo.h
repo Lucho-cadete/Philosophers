@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:43:53 by luimarti          #+#    #+#             */
-/*   Updated: 2026/01/30 21:21:14 by lucho            ###   ########.fr       */
+/*   Updated: 2026/02/15 16:43:48 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,26 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	t_data			*data;
 	long			last_meal_time;
+	int				meals_eaten;
 }	t_philo;
 
-//PARSING
+//parsing
 
 int		check_number_args(int argc);
 int		parse_args(int argc, char **argv, t_data *data);
 int		validate_values(t_data *data);
 
-//BOX_OF_TOOLS
+//box_of_tools
 
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(char *str);
 
-//Initialization
+//initialization
 
 int		init_data(t_data *data);
 int		init_philos(t_data *data, t_philo *philos);
 
-//Philosopher
+//philosopher_stuff
 
 void	taking_forks(t_philo *philo);
 void	print_action(t_philo *philo, char *action);
@@ -73,8 +74,12 @@ void	routine_for_one(t_philo *philo);
 void	starting_routine(t_philo *philo);
 void	*preparing_routine(void *arg);
 
+void	nap_sleep(long duration, t_data *data);
 long	get_time_ms(void);
+int		is_dead(t_data *data);
 int		check_death(t_data *data, int i);
 void	*monitor_death(void *arg);
+
+void	wait_and_clean(t_data *data, t_philo *philos, pthread_t monitor);
 
 #endif

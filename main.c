@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:49:45 by luimarti          #+#    #+#             */
-/*   Updated: 2026/01/30 21:25:00 by lucho            ###   ########.fr       */
+/*   Updated: 2026/02/15 16:46:09 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	main(int argc, char **argv)
 		return (1);
 	data.start_time = get_time_ms();
 	if (!init_philos(&data, philos))
+	{
+		free(philos);
 		return (1);
+	}
 	data.philos = philos;
-	pthread_create(&monitor, NULL, monitor_death, &data);
 	while (++i < data.num_philo)
 		pthread_create(&philos[i].thread, NULL, preparing_routine, &philos[i]);
-	i = -1;
-	while (++i < data.num_philo)
-		pthread_join(philos[i].thread, NULL);
-	pthread_join(monitor, NULL);
+	pthread_create(&monitor, NULL, monitor_death, &data);
+	wait_and_clean(&data, philos, monitor);
 	return (0);
 }
